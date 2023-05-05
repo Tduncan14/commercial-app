@@ -2,6 +2,7 @@ import React from 'react';
 import { Container } from 'react-bootstrap';
 import Header from './Components/Header'
 import Footer from './Components/Footer';
+import HomeScreen from './screens/HomeScreen';
 
 
 
@@ -18,7 +19,7 @@ const App = () => {
     <Header />
     <Container>
       
-      <h1>Welcome to the shop</h1>
+    <HomeScreen />
     </Container>
     <Footer/>
    </main>
