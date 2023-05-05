@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 
 
@@ -12,16 +13,16 @@ const Product = ({pro}) => {
 return (
 
     <Card className="my-3 p-3 rounded">
-        <a href={`/product/${pro._id}`}>
+        <Link to={`/product/${pro._id}`}>
             <Card.Img src={pro.image} variant='top'/>
-        </a>
+        </Link>
 
         <Card.Body>
-            <a href={`/product/${pro._id}`}>
+            <Link to={`/product/${pro._id}`}>
                  <Card.Title as ="div">
                     <strong>{pro.name}</strong>
                  </Card.Title>
-            </a>
+            </Link>
             <Card.Text as="h3">
               ${pro.price}
             </Card.Text>

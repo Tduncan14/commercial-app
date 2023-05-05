@@ -1,6 +1,7 @@
 import React from 'react';
 import {Navbar,Nav,Container} from 'react-bootstrap'
 import {FaShoppingCart,FaUser} from 'react-icons/fa';
+import {LinkContainer} from 'react-router-bootstrap';
 
 
 
@@ -11,12 +12,18 @@ const Header = () => {
     return(
         <header>
             <Navbar bg="dark" variant="dark" expand="lg"collapseOnSelect>
-               <Navbar.Brand href="/">Your Shop</Navbar.Brand>
+                <LinkContainer to="/">
+               <Navbar.Brand >Your Shop</Navbar.Brand>
+               </LinkContainer>
                <Navbar.Toggle aria-controls='basic-navbar-nav' />
                <Navbar.Collapse id="basic-navbar-nav">
                    <Nav className="ms-auto">
-                     <Nav.Link href="/cart"><FaShoppingCart /></Nav.Link>
-                     <Nav.Link href="/login"><FaUser /></Nav.Link></Nav>
+                    <LinkContainer to="/cart">
+                     <Nav.Link ><FaShoppingCart /></Nav.Link>
+                     </LinkContainer>
+                     <LinkContainer to="/signin">
+                     <Nav.Link ><FaUser /></Nav.Link>
+                     </LinkContainer></Nav>
                </Navbar.Collapse>
             </Navbar>
         </header>
