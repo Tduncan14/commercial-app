@@ -15,7 +15,7 @@ const App = () => {
 
   return(
    <>
-   <main className="py-3">
+   <main className="">
     <Header />
     <Container>
       <Outlet />

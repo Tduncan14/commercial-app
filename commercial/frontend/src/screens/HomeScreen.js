@@ -2,6 +2,7 @@ import React from 'react';
 import{Row,Col} from 'react-bootstrap';
 import Product from '../Components/products/Products';
 import products from '../Components/products/product';
+import './headscreen.css';
 
 
 const HomeScreen = () => {
@@ -12,7 +13,7 @@ const HomeScreen = () => {
     return (
     <>
 
-      <h1>Latest Products</h1>
+      <h1 className="lastest">Latest Products</h1>
     
     
     

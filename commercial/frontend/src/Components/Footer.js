@@ -12,7 +12,7 @@ const Footer = () => {
 
     return(
         <>
-         <footer>
+         <footer className="py-3"> 
             <Container>
                 <Row>
                     <Col className="text-center py-3" >
