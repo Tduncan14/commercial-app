@@ -2,7 +2,6 @@ import {useEffect,useState} from 'react';
 
 import{Row,Col} from 'react-bootstrap';
 import Product from '../Components/products/Products';
-import products from '../Components/products/product';
 import axios from 'axios';
 
 import './headscreen.css';
