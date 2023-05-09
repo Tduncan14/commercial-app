@@ -2,7 +2,11 @@ import express from 'express';
 // const express = require('express);
 import products from './data.js';
 import  dotenv from 'dotenv'
+import connectDB from './config/db.js';
+
 dotenv.config();
+
+connectDB() //connecting the db
 
 
 const app = express();
