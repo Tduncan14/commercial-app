@@ -28,7 +28,7 @@ const importData = async () => {
         const adminUser  = createdUsers[0]._id
 
 
-        const sampleProducts = product.map((product) =>{
+        const sampleProducts = products.map((product) =>{
 
             return {...product, user:adminUser}
         })
@@ -94,7 +94,19 @@ const destroyData = async () => {
 
 
 
+}
 
 
+
+if(process.argv[2] === '-d' ) {
+
+    destroyData();
+
+
+}
+
+
+else {
+    importData()
 }
 
