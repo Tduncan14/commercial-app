@@ -37,7 +37,7 @@ const orderSchema = new mongoose.Schema({
     id:{type:String},
     status:{type:String},
     update_time:{type:String},
-    email_address:{type:Strings}
+    email_address:{type:String}
   },
 
   itemsPrice:{

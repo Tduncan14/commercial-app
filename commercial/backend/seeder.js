@@ -1,10 +1,11 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import products from './';
-import users  from './Data
-import User from './models/userModel';
-import Order from './models/orderModel';
-import Product from './models/productModel';
+import products from './Data/products.js';
+import colors from 'colors'
+import users  from './Data/users.js'
+import User from './models/userModel.js';
+import Order from './models/orderModel.js';
+import Product from './models/productModel.js';
 import connectDB from './config/db.js';
 
 
@@ -44,7 +45,7 @@ const importData = async () => {
 
     catch(error){
 
-        console.error(`${err}`.red.inverse)
+        console.error(`${error}`.red.inverse)
         process.exit(1)
 
 
