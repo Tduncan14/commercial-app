@@ -2,7 +2,10 @@ import express from 'express';
 // const express = require('express);
 import products from './data.js';
 import  dotenv from 'dotenv'
+import { notFound,errorHandler } from './middleware/errorMiddleware.js';
 import connectDB from './config/db.js';
+import productRoutes from './routes/productRoutes.js'
+import e from 'express';
 
 dotenv.config();
 
@@ -13,23 +16,15 @@ const app = express();
 
 
 
-app.get('/',(req,res) => {
 
-})
-
-
-app.get('/api/products', (req,res) => {
-
-    res.send(products)
-})
-
-app.get('/api/products/:id',(req,res) => {
-
-    const product = products.find((p => p._id === req.params.id))
+app.use('/api/products',productRoutes)
 
 
-    res.send(product)
-})
+
+//  where to put error middleware
+app.use(notFound)
+app.use(errorHandler)
+
 
 const port = process.env.PORT || 5000;
 
