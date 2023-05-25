@@ -2,33 +2,37 @@ import {useEffect,useState} from 'react';
 
 import{Row,Col} from 'react-bootstrap';
 import Product from '../Components/products/Products';
-import axios from 'axios';
+// import axios from 'axios';
+import { useGetProductsQuery } from '../slices/ProductsApiSlice';
 
 import './headscreen.css';
 
 
 const HomeScreen = () => {
 
-    const [products,setProducts ] = useState([]);
+
+    const { data:products, isLoading,error}  = useGetProductsQuery();
+
+    // const [products,setProducts ] = useState([]);
 
 
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        const fetchProducts = async () => {
+    //     const fetchProducts = async () => {
 
-           const {data} = await axios.get('/api/products');
-           setProducts(data);
-
-
-
-        }
+    //        const {data} = await axios.get('/api/products');
+    //        setProducts(data);
 
 
-        fetchProducts()
+
+    //     }
 
 
-    },[])
+    //     fetchProducts()
+
+
+    // },[])
 
 
 
@@ -36,8 +40,11 @@ const HomeScreen = () => {
     return (
     <>
 
-      <h1 className="lastest">Latest Products</h1>
-    
+    {isLoading ? (
+        <h2>Loading... </h2>
+    ) : error ? (<div>
+       {error?.data?.message || error.error}
+    </div>) : (<> <h1 className="lastest">Latest Products</h1>
     
     
     <Row>
@@ -50,7 +57,9 @@ const HomeScreen = () => {
 
         ))}
     </Row>
-    
+    </>)}
+
+
     </>
     )
 }

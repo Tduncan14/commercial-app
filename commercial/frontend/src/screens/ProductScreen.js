@@ -3,32 +3,35 @@ import {useParams} from 'react-router-dom'
 import{Link } from 'react-router-dom';
 import {Row,Col,Image,ListGroup,Card,Button} from 'react-bootstrap';
 import Rating from '../Components/Rating';
-import axios from 'axios'
+import { useGetProductDetailsQuery } from '../slices/ProductsApiSlice';
+// import axios from 'axios'
 
 
 const ProductScreen = () => {
 
 
 
-    const [product,setProduct] = useState({})
+    // const [product,setProduct] = useState({})
 
 
     // to get the id from the params
     const {id:productId} = useParams();
 
+    const {data:product,isLoading, error} = useGetProductDetailsQuery(productId);
 
 
-    useEffect (() => {
 
-        const fetchProduct = async () => {
-            const {data} = await axios.get(`/api/products/${productId}`)
-             setProduct(data);
-        }
+    // useEffect (() => {
 
-        fetchProduct()
+    //     const fetchProduct = async () => {
+    //         const {data} = await axios.get(`/api/products/${productId}`)
+    //          setProduct(data);
+    //     }
+
+    //     fetchProduct()
 
 
-    },[productId])
+    // },[productId])
 
     // const  product = products.find((p) => p._id === productId)
 
@@ -46,8 +49,7 @@ const ProductScreen = () => {
             Go Back
         </Link>
 
-
-        <Row>
+          {isLoading ? (<h2>Loading...</h2>) : error ? ( <div>{error?.data?.message}</div>) : (    <Row>
             <Col md={5}>
                 <Image src={product.image} alt={product.name} fluid />
 
@@ -118,7 +120,8 @@ const ProductScreen = () => {
                 
             </Col>
         </Row>
-
+)}
+    
 
         </>
     )
