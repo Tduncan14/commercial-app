@@ -1,11 +1,12 @@
 import {useEffect,useState} from 'react';
-
+import Loaders from '../Components/Loading';
 import{Row,Col} from 'react-bootstrap';
 import Product from '../Components/products/Products';
 // import axios from 'axios';
 import { useGetProductsQuery } from '../slices/ProductsApiSlice';
-
+import Message from '../Components/Message';
 import './headscreen.css';
+import Loader from '../Components/Loading';
 
 
 const HomeScreen = () => {
@@ -41,10 +42,10 @@ const HomeScreen = () => {
     <>
 
     {isLoading ? (
-        <h2>Loading... </h2>
-    ) : error ? (<div>
+        <Loader/>
+    ) : error ? (<Message variant='danger'>
        {error?.data?.message || error.error}
-    </div>) : (<> <h1 className="lastest">Latest Products</h1>
+    </Message>) : (<> <h1 className="lastest">Latest Products</h1>
     
     
     <Row>
