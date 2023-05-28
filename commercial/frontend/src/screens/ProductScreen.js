@@ -1,12 +1,14 @@
 import {useState, useEffect} from 'react';
-import {useParams} from 'react-router-dom'
+import {useParams,useNavigate} from 'react-router-dom'
 import{Link } from 'react-router-dom';
 import {Row,Col,Image,ListGroup,Card,Button,Form} from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
 import Rating from '../Components/Rating';
 import { useGetProductDetailsQuery } from '../slices/ProductsApiSlice';
 import Loader from '../Components/Loading';
 // import axios from 'axios'
 import Message from '../Components/Message';
+import { addToCart } from '../slices/CartSlice';
 
 
 const ProductScreen = () => {
@@ -21,9 +23,21 @@ const ProductScreen = () => {
 
     const {id:productId} = useParams();
 
+    const dispatch =  useDispatch()
+    const navigate = useNavigate()
+
     const[qty,setQty] = useState(1)
 
+
     const {data:product,isLoading, error} = useGetProductDetailsQuery(productId);
+
+
+    
+    const addToCartHandler = () =>{
+        dispatch(addToCart({...product,qty}))
+        navigate('/cart')
+
+    }
 
 
 
@@ -144,7 +158,8 @@ const ProductScreen = () => {
                         <ListGroup.Item>
                             <Button className="btn-block"
                             type="button"
-                            disabled={product.countInStock === 0}>
+                            disabled={product.countInStock === 0}
+                            onClick ={addToCartHandler}>
                               Add to cart
                             </Button>
                         </ListGroup.Item>
