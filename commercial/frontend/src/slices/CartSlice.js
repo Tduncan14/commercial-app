@@ -32,7 +32,17 @@ const cartSlice = createSlice({
             // 
 
             return updateCart(state)
-        }
+        },
+
+        removeFromCart:(state,action) => {
+
+            //  to remove items 
+            state.cartItems = state.cartItems.filter((x) => x._id !== action.payload) 
+
+            // update local storage
+
+            return updateCart(state)
+        } 
     }
 })
 
@@ -41,7 +51,7 @@ const cartSlice = createSlice({
 
 //  any function needs to be exported as action
 
-export const {addToCart} = cartSlice.actions
+export const {addToCart,removeFromCart} = cartSlice.actions
 
 
 

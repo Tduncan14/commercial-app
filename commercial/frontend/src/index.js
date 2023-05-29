@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen'
+import CartScreen from './screens/Cartscreen'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import {createBrowserRouter,createRoutesFromElements,Route, RouterProvider} from 'react-router-dom'
@@ -16,6 +17,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<App />}>
       <Route index={true}path="/" element={<HomeScreen />}/>
       <Route path="/product/:id" element ={<ProductScreen />} />
+      <Route path = '/cart' element={<CartScreen />} />
     </Route>
   )
 )
