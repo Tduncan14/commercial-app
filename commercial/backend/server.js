@@ -5,6 +5,7 @@ import  dotenv from 'dotenv'
 import { notFound,errorHandler } from './middleware/errorMiddleware.js';
 import connectDB from './config/db.js';
 import productRoutes from './routes/productRoutes.js'
+import userRoutes from './routes/userRoutes.js'
 import e from 'express';
 
 dotenv.config();
@@ -17,7 +18,8 @@ const app = express();
 
 
 
-app.use('/api/products',productRoutes)
+app.use('/api/products',productRoutes);
+app.use('/api/users',userRoutes)
 
 
 
