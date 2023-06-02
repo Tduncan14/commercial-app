@@ -31,7 +31,6 @@ const authUser = asynceHandler(async(req,res) => {
         throw new Error('Invalid email or password');
     }
 
-    res.send('auth user')
 })
 
 
