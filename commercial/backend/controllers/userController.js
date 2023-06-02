@@ -11,6 +11,26 @@ import User from '../models/userModel.js';
 
 const authUser = asynceHandler(async(req,res) => {
 
+    const {email,password} = req.body
+
+    // checking for the user
+    const user = await User.findOne({email:email})
+//  a way to compare passwords
+    if(user && (await user.matchPassword(password))){
+        res.json({
+            _id:user._id,
+            name:user.name,
+            email:user.email,
+            isAdmin:user.isAdmin
+        })
+
+    }
+
+    else{
+        res.status(401);
+        throw new Error('Invalid email or password');
+    }
+
     res.send('auth user')
 })
 
