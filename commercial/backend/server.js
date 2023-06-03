@@ -6,6 +6,7 @@ import { notFound,errorHandler } from './middleware/errorMiddleware.js';
 import connectDB from './config/db.js';
 import productRoutes from './routes/productRoutes.js'
 import userRoutes from './routes/userRoutes.js'
+import cookieParser from 'cookie-parser';
 import e from 'express';
 
 dotenv.config();
@@ -20,6 +21,9 @@ const app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
+// cookie parser middle
+
+app.use(cookieParser());
 
 
 
