@@ -6,7 +6,7 @@ import User from "../models/userModel.js";
 
 // protected routes
 
-export const protect = asyncHandler (async(req,res,next) => {
+ const protect = asyncHandler (async(req,res,next) => {
 
     let token;
 
@@ -64,3 +64,6 @@ const admin = (req, res,next) => {
     }
 
 }
+
+
+export {protect,admin}
