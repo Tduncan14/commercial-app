@@ -1,7 +1,7 @@
 import asynceHandler from '../middleware/asyncHandler.js'
 import User from '../models/userModel.js';
-import jwt from 'jsonwebtoken'
-
+// import jwt from 'jsonwebtoken'
+import generateToken from '../utils/generateToken.js';
 
 
 // auth user and get token
@@ -19,6 +19,7 @@ const authUser = asynceHandler(async(req,res) => {
 //  a way to compare passwords
     if(user && (await user.matchPassword(password))){
 
+        generateToken(res, user._id)
         // adding the jsonwebtoken
         //header
         //data
@@ -63,7 +64,42 @@ const authUser = asynceHandler(async(req,res) => {
 
 
 const registerUser = asynceHandler(async(req,res) => {
-    res.send('register')
+
+    const {name,email,password} = req.body
+
+      const userExist = await User.findOne({email})
+
+
+      if(userExist){
+        res.status(400)
+        throw new Error('User already exist')
+      }
+
+
+      const user = await User.create({
+        name,
+        email,
+        password
+      })
+
+
+      // check for the user
+
+
+
+      if(user){
+
+        generateToken(res, user._id)
+        res.status(201).json({
+            _id:user._id,
+            name:user.name,
+            email:user.email,
+            isAdmin:user.isAdmin 
+
+        })
+      }
+
+  
 })
 
 
@@ -73,7 +109,12 @@ const registerUser = asynceHandler(async(req,res) => {
 
 
 const logoutUser = asynceHandler(async(req,res)=> {
-    res.send('logput')
+     res.cookie('jwt','', {
+        httpOnly:true,
+        expires:new Date(0)
+     })
+
+     res.status(200).json({message:'Logged Out Successfully'})
 
 })
 
