@@ -41,7 +41,7 @@ const authUser = asynceHandler(async(req,res) => {
         })
 
 
-        res.json({
+        res.status(200).json({
             _id:user._id,
             name:user.name,
             email:user.email,
@@ -121,7 +121,25 @@ const logoutUser = asynceHandler(async(req,res)=> {
 
 const getUserProfile = asynceHandler(async(req,res) => {
 
-  res.send('user profile')
+  const user = await User.findById(req.user._id)
+
+
+   if(user){
+
+    res.status(200).json({
+
+        _id: user._id,
+        name:user.name,
+        email:user.email,
+        isAdmin:user.isAdmin
+    })
+
+   }
+
+   else {
+    res.status(404);
+    throw new Error('User not found')
+   }
 })
 
 
@@ -131,7 +149,31 @@ const getUserProfile = asynceHandler(async(req,res) => {
 //admin
 
 const updateUserProfile = asynceHandler(async(req,res) => {
-    res.send('get users')
+    const user = await User.findById(req.user._id)
+    
+    if(user){
+        user.name =  req.body.name || user.name;
+        user.email = req.body.email || user.email
+    
+
+    if(req.body.password){
+        user.password = req.password
+    }
+
+    const updateUser = await user.save()
+
+    res.status(200).json({
+        _id:updateUser._id,
+        name:updateUser.name,
+        email:updateUser.email,
+        isAdmin:updateUser.isAdmin
+    })
+    }
+
+    else{
+        res.status(404)
+        throw new Error('User is not found ')
+    }
 }) 
 
 
