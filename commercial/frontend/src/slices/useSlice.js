@@ -1,5 +1,5 @@
 import { USERS_URL } from "../constant";
-import { apiSlice } from "@reduxjs/toolkit";
+import { apiSlice } from "./apiSlice";
 
 
 
@@ -10,7 +10,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
 
      login: builder.mutation({
              query: (data) => ({
-                url:USERS_URL/auth,
+                url:`${USERS_URL}/auth`,
                 method:'POST',
                 body:data
        })
