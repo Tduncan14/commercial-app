@@ -10,7 +10,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+import LoginScreen from './screens/Login';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -18,6 +18,7 @@ const router = createBrowserRouter(
       <Route index={true}path="/" element={<HomeScreen />}/>
       <Route path="/product/:id" element ={<ProductScreen />} />
       <Route path = '/cart' element={<CartScreen />} />
+      <Route path='/signin' element={<LoginScreen />} />
     </Route>
   )
 )
