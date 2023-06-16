@@ -7,6 +7,8 @@ import connectDB from './config/db.js';
 import productRoutes from './routes/productRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import cookieParser from 'cookie-parser';
+import cors from 'cors'
+
 import e from 'express';
 
 dotenv.config();
@@ -16,10 +18,10 @@ connectDB() //connecting the db
 
 const app = express();
 
-
 // parser the body of express
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
+app.use(cors())
 
 // cookie parser middle
 

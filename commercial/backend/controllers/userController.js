@@ -1,6 +1,6 @@
 import asynceHandler from '../middleware/asyncHandler.js'
 import User from '../models/userModel.js';
-// import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken'
 import generateToken from '../utils/generateToken.js';
 
 
@@ -25,21 +25,19 @@ const authUser = asynceHandler(async(req,res) => {
         //data
         //signature
 
-        const token = jwt.sign({
-            userId:user._id
-        },process.env.JWT_SECRET,{
-            expiresIn:'30d'
+        // const token = jwt.sign({
+        //     userId:user._id
+        // },process.env.JWT_SECRET,{
+        //     expiresIn:'30d'
 
-        })
+        // })
+
+        console.log('where')
 
         // set jwt as http-only cookie
-        res.cookie('jwt',token,{
-            httpOnly:true,
-            secure:process.env.NODE_ENV !=='development',
-            sameSite:'strict',
-            maxAge:30*24*24*60*60 * 1000 // 30 days
-        })
+ 
 
+        console.log('does it stop')
 
         res.status(200).json({
             _id:user._id,

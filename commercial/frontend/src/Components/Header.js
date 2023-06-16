@@ -1,5 +1,5 @@
 import React from 'react';
-import {Navbar,Nav,Container,Badge} from 'react-bootstrap'
+import {Navbar,Nav,Container,Badge, NavDropdown} from 'react-bootstrap'
 import {FaShoppingCart,FaUser} from 'react-icons/fa';
 import {LinkContainer} from 'react-router-bootstrap';
 import {useSelector} from 'react-redux';
@@ -9,7 +9,12 @@ const Header = () => {
 
 
     const {cartItems} = useSelector((state) => state.cart)
+    const {userInfo} = useSelector((state) => state.auth)
     console.log(cartItems,'items')
+
+    const logoutHandler = () => {
+        console.log('logout')
+    }
 
 
 
@@ -23,6 +28,7 @@ const Header = () => {
                <Navbar.Collapse id="basic-navbar-nav">
                    <Nav className="ms-auto">
                     <LinkContainer to="/cart">
+                     
                      <Nav.Link ><FaShoppingCart />
                      {
                         cartItems.length > 0 && (<Badge pill bg='success' style={{marginLeft:'5px'}}>
@@ -32,9 +38,17 @@ const Header = () => {
                      }
                      </Nav.Link>
                      </LinkContainer>
-                     <LinkContainer to="/signin">
+                     {userInfo ? (<NavDropdown title={userInfo.name} id='username'>
+                        <LinkContainer to="/profile">
+                               <NavDropdown.Item>Profile</NavDropdown.Item>
+                               <NavDropdown.Item onClick ={logoutHandler}>
+
+                               </NavDropdown.Item>
+                        </LinkContainer>
+                     </NavDropdown>) : (  <LinkContainer to="/signin">
                      <Nav.Link ><FaUser /></Nav.Link>
-                     </LinkContainer></Nav>
+                     </LinkContainer>)}
+                   </Nav>
                </Navbar.Collapse>
             </Navbar>
         </header>
