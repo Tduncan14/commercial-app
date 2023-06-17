@@ -1,8 +1,12 @@
 import React from 'react';
+import {useNavigate} from 'react-router-dom';
 import {Navbar,Nav,Container,Badge, NavDropdown} from 'react-bootstrap'
 import {FaShoppingCart,FaUser} from 'react-icons/fa';
 import {LinkContainer} from 'react-router-bootstrap';
-import {useSelector} from 'react-redux';
+import { useLogoutMutation } from '../slices/useSlice';
+import { logout } from '../slices/authSlice';
+import {useSelector,useDispatch} from 'react-redux';
+
 
 
 const Header = () => {
@@ -10,10 +14,36 @@ const Header = () => {
 
     const {cartItems} = useSelector((state) => state.cart)
     const {userInfo} = useSelector((state) => state.auth)
+
+
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+
+
+
+
+
     console.log(cartItems,'items')
 
-    const logoutHandler = () => {
-        console.log('logout')
+
+    // the mutation function to call
+    const [logoutApiCall] = useLogoutMutation()
+
+    const logoutHandler =  async () => {
+        try{
+            // you can unwrap promise
+            await logoutApiCall().unwrap();
+            dispatch(logout())
+            navigate('/login')
+
+        }
+
+        catch(error){
+
+            console.log(error)
+            
+        }
     }
 
 
@@ -44,7 +74,7 @@ const Header = () => {
                                <NavDropdown.Item>Profile</NavDropdown.Item>
                                </LinkContainer>
                                <NavDropdown.Item onClick ={logoutHandler}>
-
+                                 Logout
                                </NavDropdown.Item>
                                
                      
